@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fromis_9 취향저격 플레이리스트</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <h1><span class="h1-black">Fromis_9</span> <span class="h1-pink">플레이리스트 제작 프로그램</span></h1>
+        <div id="how_about" class="howaboutthis-card p">
+            <p id="how_about_question"> 이건어때요?</p>
+            <div class="selector">
+                <div class="option"><input type="radio" id="likeyoubetter" name="streaming" value="likeyoubetter"><label for="likeyoubetter">Like you better 플레이리스트</label></div>
+            </div>
+        </div>
+
+        <div id="q2-card" class="question-card">
+            <p id="question-time">2. 언제 들을 노래인가요?</p>
+            <div class="selector" id="time-selector">
+                <div class="option"><input type="radio" id="time-morning" name="time" value="morning"><label for="time-morning">☀️ 활기찬 아침/낮</label></div>
+                <div class="option"><input type="radio" id="time-afternoon" name="time" value="afternoon"><label for="time-afternoon">☕ 나른한 오후</label></div>
+                <div class="option"><input type="radio" id="time-night" name="time" value="night"><label for="time-night">🌙 감성적인 밤</label></div>
+                <div class="option"><input type="radio" id="time-drive" name="time" value="drive"><label for="time-drive"> 🚗드라이브</div>
+            </div>
+        </div>
+
+        <div id="q1-card" class="question-card">
+            <p id="question-mood">1. 지금 어떤 분위기의 노래가 듣고 싶으세요?</p>
+            <div class="selector" id="mood-selector">
+                <div class="option"><input type="radio" id="mood-upbeat" name="mood" value="upbeat"><label for="mood-upbeat">🎉 신나고 활기찬 노래</label></div>
+                <div class="option"><input type="radio" id="mood-calm" name="mood" value="calm"><label for="mood-calm">😌 차분하고 감성적인 노래</label></div>
+                <div class="option"><input type="radio" id="mood-sweet" name="mood" value="sweet"><label for="mood-sweet">💖 두근두근 설레는 노래</label></div>
+                <div class="option"><input type="radio" id="mood-sad" name="mood" value="sad"><label for="mood-sad">😢 희망적인 노래</label></div>
+            </div>
+        </div>
+        
+        <div id="control-buttons">
+            <button id="back-btn">← 1번으로 돌아가기</button>
+            <button id="generate-btn">플레이리스트 만들기</button>
+        </div>
+        
+        <div id="playlist-result">
+            <h2>추천 플레이리스트</h2>
+            <ul id="song-list"></ul>
+            <a id="youtube-link" href="#" target="_blank">
+                <button id="youtube-btn">▶️ 유튜브에서 전체 듣기</button>
+            </a>
+            <button id="return-btn">되돌아가기</button>
+            <button id="share-btn">공유하기</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
