@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: fromis9-playlist
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
