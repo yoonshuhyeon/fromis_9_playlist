@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 
 # Flask 앱 생성
-app = Flask(__name__, static_folder='.', template_folder='.')
+app = Flask(__name__, static_folder='static', template_folder='.')
 
 # 루트 URL('/')에 접속했을 때 실행될 함수
 @app.route('/')
