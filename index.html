@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fromis_9 취향저격 플레이리스트</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div id="app-container">
@@ -37,8 +37,8 @@
         </div>
         
         <div id="control-buttons">
-            <button id="back-btn">← 1번으로 돌아가기</button>
             <button id="generate-btn">플레이리스트 만들기</button>
+            <button id="back-btn">← 1번으로 돌아가기</button>
         </div>
         
         <div id="playlist-result">
@@ -47,10 +47,19 @@
             <a id="youtube-link" href="#" target="_blank">
                 <button id="youtube-btn">▶️ 유튜브에서 전체 듣기</button>
             </a>
-            <button id="return-btn">되돌아가기</button>
             <button id="share-btn">공유하기</button>
+            <button id="return-btn">되돌아가기</button>
+        </div>
+        <div id="how_about_result">
+            <h3>like you better 플레이리스트</h3>
+            <ul id="howabout-song-list"></ul>
+            <a id="howabout-youtube-link" href="#" target="_blank">
+                <button id="howabout-youtube-btn">▶️ 유튜브에서 전체 듣기</button>
+            </a>
+            <button id="howabout-share-btn">공유하기</button>
+            <button id="howabout-return-btn">되돌아가기</button>
         </div>
     </div>
-    <script src="static/script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
