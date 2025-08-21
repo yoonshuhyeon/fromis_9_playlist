@@ -97,6 +97,8 @@ h1 {
 }
 
 #control-buttons {
+    display: flex;
+    flex-direction: column;
     margin-top: 10px;
 }
 
@@ -114,6 +116,7 @@ h1 {
 
 #generate-btn {
     background-color: #e84393;
+    margin-bottom: 10px;
 }
 
 #generate-btn:hover {
@@ -122,32 +125,31 @@ h1 {
 
 #back-btn {
     background-color: #6c757d;
-    margin-bottom: 10px;
 }
 
 #back-btn:hover {
     background-color: #5a6268;
 }
 
-#playlist-result {
+#playlist-result, #how_about_result {
     margin-top: 30px;
     text-align: left;
     display: none;
 }
 
-#playlist-result h2 {
+#playlist-result h2, #how_about_result h3 {
     color: #333;
     border-bottom: 2px solid #f0f0f0;
     padding-bottom: 10px;
     margin-bottom: 15px;
 }
 
-#song-list {
+#song-list, #howabout-song-list {
     list-style: none;
     padding: 0;
 }
 
-#song-list li {
+#song-list li, #howabout-song-list li {
     background: #fafafa;
     padding: 12px 15px;
     border-radius: 8px;
@@ -181,11 +183,11 @@ h1 {
     cursor: not-allowed;
 }
 
-#youtube-link {
+#youtube-link, #howabout-youtube-link {
     text-decoration: none;
 }
 
-#youtube-btn {
+#youtube-btn, #howabout-youtube-btn {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
@@ -198,7 +200,8 @@ h1 {
     color: white;
     margin-top: 15px;
 }
-#return-btn {
+
+#return-btn, #howabout-return-btn {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
@@ -212,7 +215,7 @@ h1 {
     margin-top: 10px;
 }
 
-#share-btn {
+#share-btn, #howabout-share-btn {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
@@ -226,6 +229,6 @@ h1 {
     margin-top: 10px;
 }
 
-#youtube-btn:hover {
+#youtube-btn:hover, #howabout-youtube-btn:hover {
     background-color: #cc0000;
 }
