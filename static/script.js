@@ -83,6 +83,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const youtubeIds = playlist.map(song => song.youtubeId).join(',');
         const playlistUrl = `https://www.youtube.com/watch_videos?video_ids=${youtubeIds}`;
         youtubeLinkElement.href = playlistUrl;
+        const CHUNK_SIZE = 4;
+        const youtubeIdChunks = [];
+        for (let i = 0; i < playlist.length; i += CHUNK_SIZE) {
+            youtubeIdChunks.push(playlist.slice(i, i + CHUNK_SIZE));
+        }
+
+        const youtubeLink = document.createElement('a');
+        youtubeLink.href = '#';
+        const youtubeButton = document.createElement('button');
+        youtubeButton.textContent = '▶️ 유튜브에서 전체 듣기';
+        youtubeLink.appendChild(youtubeButton);
+
+        youtubeLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            youtubeIdChunks.forEach((chunk, index) => {
+                setTimeout(() => {
+                    const youtubeIds = chunk.map(song => song.youtubeId).join(',');
+                    const playlistUrl = `https://www.youtube.com/watch_videos?video_ids=${youtubeIds}`;
+                    window.open(playlistUrl, '_blank');
+                }, index * 200);
+            });
+        });
+
+        const youtubeLinksContainer = document.createElement('div');
+        youtubeLinkElement.parentElement.insertBefore(youtubeLinksContainer, youtubeLinkElement);
+        youtubeLinkElement.style.display = 'none';
+        youtubeLinksContainer.appendChild(youtubeLink);
     }
 
     // Event Listener for "Like you better" Playlist
