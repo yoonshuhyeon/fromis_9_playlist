@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, make_response, session, redirect, url_for
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
@@ -7,15 +7,12 @@ import os
 
 # Flask 앱 생성
 app = Flask(__name__, static_folder='static', template_folder='.')
-
 app.secret_key = 'super_secret_key'  # Change this to a random secret key
-
 
 # Get the absolute path to the directory of the current script
 script_dir = os.path.dirname(os.path.abspath(__file__))
 # Join the directory with the filename to get the absolute path to songs.json
 json_path = os.path.join(script_dir, 'songs.json')
-
 
 @app.route('/authorize')
 def authorize():
@@ -79,9 +76,18 @@ def create_playlist():
         with open(json_path, 'r', encoding='utf-8') as f:
             songs = json.load(f)
         
-        video_ids = [song['youtubeId'] for song in songs if 'likeyoubetter' in song.get('howabout', {})]
+        # Create a dictionary to store the songs with their positions
+        playlist_with_positions = {}
+        for song in songs:
+            if 'likeyoubetter' in song.get('howabout', {}):
+                positions = song['howabout']['likeyoubetter']
+                for pos in positions:
+                    playlist_with_positions[pos] = song
 
-        for video_id in video_ids:
+        # Sort the playlist by position and get the video IDs
+        sorted_video_ids = [playlist_with_positions[k]['youtubeId'] for k in sorted(playlist_with_positions.keys())]
+
+        for video_id in sorted_video_ids:
             youtube.playlistItems().insert(
                 part="snippet",
                 body={
@@ -98,7 +104,6 @@ def create_playlist():
         return jsonify({'success': True, 'playlist_id': playlist_id})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
-
 
 # 루트 URL('/')에 접속했을 때 실행될 함수
 @app.route('/')
@@ -141,13 +146,13 @@ def get_playlist(playlist_name):
 
     return jsonify(sorted_playlist)
 
-
-@app.route('/youtube')
-def youtube_playlist():
+@app.route('/is_authenticated')
+def is_authenticated():
     if 'credentials' in session:
-        return render_template('youtube_playlist_authed.html')
+        return jsonify({'authenticated': True})
     else:
-        return render_template('youtube_playlist.html')
+        return jsonify({'authenticated': False})
+
 
 
 # 이 파일이 직접 실행될 때만 서버를 실행

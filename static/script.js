@@ -1,4 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const loginBtn = document.getElementById('login-btn');
+    const createPlaylistBtn = document.createElement('button');
+    createPlaylistBtn.id = 'create-playlist-btn';
+    createPlaylistBtn.textContent = 'like you better 플레이리스트 생성';
+
+    fetch('/is_authenticated')
+        .then(response => response.json())
+        .then(data => {
+            if (data.authenticated) {
+                loginBtn.style.display = 'none';
+                const appContainer = document.getElementById('app-container');
+                appContainer.insertBefore(createPlaylistBtn, appContainer.firstChild);
+            } else {
+                createPlaylistBtn.style.display = 'none';
+            }
+        });
+
+    createPlaylistBtn.addEventListener('click', () => {
+        fetch('/create_playlist', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Playlist created! View it here: https://www.youtube.com/playlist?list=${data.playlist_id}`);
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            });
+    });
     const howaboutBtn = document.getElementById('how_about');
     const q1Card = document.getElementById('q1-card');
     const q2Card = document.getElementById('q2-card');
@@ -152,6 +180,21 @@ document.addEventListener('DOMContentLoaded', () => {
         updateViewState('Q1');
     });
 
+
+    const likeYouBetterBtn = document.getElementById('like-you-better-btn');
+
+    likeYouBetterBtn.addEventListener('click', () => {
+        fetch('/api/playlist/likeyoubetter')
+            .then(response => response.json())
+            .then(playlist => {
+                if (playlist.length > 0) {
+                    createSongList(playlist, songList, youtubeLink);
+                    updateViewState('RESULT');
+                } else {
+                    alert('아쉽지만 조건에 맞는 노래를 찾지 못했어요. 😥');
+                }
+            });
+    });
 
     // Event Listener for Generate Button
     generateBtn.addEventListener('click', () => {
